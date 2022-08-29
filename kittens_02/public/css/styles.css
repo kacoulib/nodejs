@@ -60,7 +60,7 @@ nav a:hover {
   justify-content: space-around;
 }
 
-.kitten{
+.kitten {
   background: tomato;
   padding: 5px;
   width: 250px;
@@ -74,7 +74,7 @@ nav a:hover {
   border: 3px solid black;
 }
 
-a{
+a {
   font-size: 2rem;
   text-transform: uppercase;
   padding: 2rem 0;
@@ -84,7 +84,7 @@ a{
   transition: color 0.3s linear;
 }
 
-img{
+img {
   width: 35%;
   float: left;
 }
