@@ -1,13 +1,20 @@
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
+import session from "express-session";
 
+// import Middlawares
+import authMiddleware from "./middlewares/auth.js";
+import partityMiddleware from "./middlewares/party.js";
+
+// config
+import { port, hostname, sessionSecret } from "./config/index.js";
+
+// console.log(process.env);
 // ==========
 // App initialization
 // ==========
 
-const hostname = "localhost";
-const port = 8000;
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const app = express();
@@ -15,47 +22,53 @@ const app = express();
 // ==========
 // App middlewares
 // ==========
-
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
+app.use(
+  session({
+    name: "simple_00",
+    secret: sessionSecret,
+    resave: false,
+    saveUninitialized: true,
+  })
+);
 
 // ==========
 // App routes
 // ==========
-let message = "";
-const authMiddleware = (req, res, next) => {
-  /// auth verifications ...
-  // if user exists
-  const user = {
-    id: 1,
-    username: "admin",
-    password: "admin",
-  };
-
-  if (!user) {
-    return res.status(401).json({ message: "Unauthorized" });
-  }
-  req.user = user;
-  next();
-};
-
-const partityMiddleware = (req, res, next) => {
-  const { number } = req.params;
-
-  // is not a number
-  if (isNaN(number)) {
-    return res.status(500).json({ message: `${number} n'est pas un nombre !` });
-  }
-
-  message = `Le nombre ${number} est ${number % 2 === 0 ? "pair" : "impair"}.`;
-  next();
-};
 
 app.get("/", (req, res) => {
-  res.json({ message: "Hello World" });
+  if (req.session.count) {
+    req.session.count++;
+  } else {
+    req.session.count = 1;
+  }
+
+  if (req.session.count > 5) {
+    return res.redirect("/check");
+  }
+
+  res.json({ message: `The count is ${req.session.count}` });
 });
-app.get("/check/:number", authMiddleware, partityMiddleware, (req, res) => {
-  res.json({ message });
+
+app.get("/check", (req, res) => {
+  res.json({ message: "Redirection", count: req.session.count });
 });
+
+app.get("/delete", (req, res) => {
+  req.session.count = 0;
+  res.redirect("/");
+});
+
+app.get(
+  "/check/:number",
+  authMiddleware,
+  partityMiddleware,
+  ({ message }, res) => {
+    res.json({ message });
+  }
+);
 
 // ==========
 // App start

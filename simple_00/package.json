@@ -13,7 +13,9 @@
     "nodemon": "^2.0.16"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "dotenv": "^16.0.1",
+    "express": "^4.17.1",
+    "express-session": "^1.17.3"
   },
   "type": "module"
 }
