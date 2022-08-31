@@ -1,9 +1,12 @@
 import express from "express";
+import cors from "cors";
 import dotenv from "dotenv";
 
 dotenv.config();
 const { APP_LOCALHOST_B: hostname, APP_PORT_B: port } = process.env;
 const app = express();
+
+app.use(cors());
 
 app.get("/c", (req, res) => {
   const users = [
