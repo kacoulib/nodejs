@@ -1,0 +1,9 @@
+extends ../layouts/frontend.pug
+
+block content
+    .ui.one.column.page.grid
+        .column.twelve.wide
+            each post in posts
+                div
+                    h1= post.title
+                    p= post.date
