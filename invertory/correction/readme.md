@@ -116,3 +116,21 @@ ProductModel.deleteMany({ name: "Alex" }); // Supprime TOUS les documents trouv�
 ```
 
 ---
+
+## 02 Exercice shop
+
+Récupérez le fichier `Product.js`, et vérifiez que les données sont toujours présentes dans la base `shop`.
+
+Mettez en place une petite API pour interroger ces données. Cette application retournera uniquement du JSON. Vous installerez un serveur Node.js Express avec ce que vous avez déjà vu en cours.
+
+Voici les endpoints API que l'on souhaiterait mettre en place :
+
+- / => Sur l'adresse principale on peut afficher la statistique des contenus : combien de document en tout (JSON)
+
+- /all => Tous les noms des entreprises avec leurs quantitées respectives
+
+- /delete/Alex => Supprimez un document donné en fonction du nom de sa société.
+
+- /show/Alice => Affichez les informations d'une société en fonction de son nom.
+
+Vous utiliserez également les mots-clé `async/await` pour manipuler les promesses Mongoose.
