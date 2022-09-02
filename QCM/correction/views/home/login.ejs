@@ -1,0 +1,26 @@
+<%- include('../partials/header') -%>
+<div class="ui one column page grid">
+<div class="column twelve wide">
+<%- include('../partials/message' , { messages } ) %>
+<form action="/login" method="post" class="ui large form">
+    <div class="ui stacked segment">
+        <div class="field">
+            <div class="ui left icon input">
+                <i class="user icon"></i>
+                <input type="text" name="email" placeholder="E-mail address"
+                    value="<%= old['email'] %>">
+            </div>
+        </div>
+        <div class="field">
+            <div class="ui left icon input">
+                <i class="lock icon"></i>
+                <input type="password" name="password" placeholder="Password">
+            </div>
+        </div>
+        <button type="submit" class="ui fluid large teal submit button">Login</button>
+    </div>
+    <div class="ui error message"></div>
+</form>
+</div>
+</div>
+    <%- include('../partials/footer') -%>

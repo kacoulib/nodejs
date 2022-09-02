@@ -1,0 +1,26 @@
+<% if( typeof messages !== 'undefined' || messages.length > 0  ) { %>
+<% for(const { message, title, type } of messages ){ %>
+<div class="ui <%= type %> message">
+    <i class="close"></i>
+    <div class="header">
+        <%= title %>
+    </div>
+    <ul class="list">
+        <li>
+            <%= message %>
+        </li>
+    </ul>
+</div>
+<% }  %>
+<% }  %>
+
+<% if(typeof flash_message !== 'undefined' && flash_message.lenght > 0) { %>
+<div class="ui success message">
+    <i class="close"></i>
+    <ul class="list">
+        <li>
+            <%= flash_message %>
+        </li>
+    </ul>
+</div>
+<% } %>
